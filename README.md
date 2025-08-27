@@ -83,3 +83,41 @@ O resultado da multiplicação de exemplo aparecerá na tela. Para testar com ou
 • `findDiff(str1, str2)`: função para encontrar a diferença de maiores números representados como strings.
 
 • `removeLeadingZeros(s)`: função para remover todos os zeros iniciais de uma string.
+
+## Relatório Técnico
+### Análise da complexidade ciclomática
+Mede a quantidade de caminhos independentes em um código-fonte.
+
+#### Fluxo de Controle do algoritmo de Karatsuba:
+
+1. A função inicia.
+
+2. Um if verifica se os números são pequenos (caso base).
+
+3. Se for verdadeiro, a multiplicação direta é retornada e a função termina.
+
+4. Se for falso, o código continua. Calcula n e n2, e adiciona zeros à esquerda dos números.
+
+5. Os números são divididos na metade.
+
+6. Três chamadas recursivas (p, q, r) são executadas.
+
+7. O termo do meio é calculado.
+
+8. Os resultados são combinados.
+
+9. O resultado final é retornado e a função termina.
+
+#### Estruturando o Grafo de fluxo:
+
+Nós:
+• N1: assinatura da função multiply.
+• N2: condição if len(A) < 4 or len(B) < 4.
+• N3: return str(int(A) * int(B)).
+• N4: atribuição de n = max(len(A), len(B))
+• N5: condição if n % 2 != 0.
+• N6: atribuição de n += 1.
+•
+•
+•
+•
