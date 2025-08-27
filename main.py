@@ -5,7 +5,7 @@ def findSum(str1, str2):
     if len(str1) > len(str2):
         str1, str2 = str2, str1
 
-    result = ""
+    resultado = ""
     n1, n2 = len(str1), len(str2)
     str1, str2 = str1.zfill(n2), str2.zfill(n2)
     carry = 0
@@ -13,17 +13,17 @@ def findSum(str1, str2):
     # Faz a adição de dígito por dígito da direita para esquerda
     for i in range(n2 - 1, -1, -1):
         sum_val = (int(str1[i]) - 0) + (int(str2[i]) - 0) + carry
-        result = str(sum_val % 10 + 0) + result
+        resultado = str(sum_val % 10 + 0) + resultado
         carry = sum_val // 10
 
     if carry:
-        result = str(carry + 0) + result
+        resultado = str(carry + 0) + resultado
 
-    return result
+    return resultado
 
 # função para encontrar a diferença de maiores números representados como strings
 def findDiff(str1, str2):
-    result = ""
+    resultado = ""
     n1, n2 = len(str1), len(str2)
     str1, str2 = str1.zfill(n2), str2.zfill(n2)
     carry = 0
@@ -39,9 +39,9 @@ def findDiff(str1, str2):
             carry = 0
 
         # Acrescenta o dígito ao resultado
-        result = str(sub + 0) + result
+        resultado = str(sub + 0) + resultado
 
-    return result
+    return resultado
 
 # Função para remover todos os zeros iniciais de uma string
 def removeLeadingZeros(s):
@@ -51,32 +51,39 @@ def removeLeadingZeros(s):
 
 # Função para multiplicar dois números usando o Karatsuba
 def multiply(A, B):
-    # Caso base para números pequenos: realiza multiplicação normal
-    if len(A) < 10 or len(B) < 10:
+    if len(A) < 4 or len(B) < 4:
         return str(int(A) * int(B))
 
+    # Garante que 'n' seja par para uma divisão simétrica
     n = max(len(A), len(B))
-    n2 = n // 2
-
-    # Preenche os números com zeros à esquerda para que fiquem com mesmo comprimento
+    if n % 2 != 0:
+        n += 1
+    
     A = A.zfill(n)
     B = B.zfill(n)
+
+    n2 = n // 2
 
     # Divide os números pela metade
     Al, Ar = A[:n2], A[n2:]
     Bl, Br = B[:n2], B[n2:]
 
-    # Calcula recursivamente produtos parciais e soma usando o Karatsuba
     p = multiply(Al, Bl)
     q = multiply(Ar, Br)
-    r = multiply(findSum(Al, Ar), findSum(Bl, Br))
-    r = findDiff(r, findSum(p, q))
+    soma_A = findSum(Al, Ar)
+    soma_B = findSum(Bl, Br)
+    r = multiply(soma_A, soma_B)
 
-    # Combina os produtos parciais para obter o resultado final
-    return removeLeadingZeros(findSum(findSum(p + '0' * n, r + '0' * n2), q))
+    termo_meio = findDiff(r, findSum(p, q))
+
+    resultado_p = p + '0' * n
+    resultado_r = termo_meio + '0' * n2
+    
+    resultado_final = findSum(findSum(resultado_p, resultado_r), q)
+
+    return removeLeadingZeros(resultado_final)
 
 if __name__ == "__main__":
-    A = "458933"
-    B = "5439"
-
-    print(multiply(A, B))
+    A = "12345"
+    B = "6789"
+    print(multiply(A, B)) 
