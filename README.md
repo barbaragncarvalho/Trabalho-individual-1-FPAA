@@ -110,7 +110,7 @@ Mede a quantidade de caminhos independentes em um código-fonte.
 
 #### Estruturando o Grafo de fluxo:
 
-![Grafo de Fluxo]()
+![Grafo de Fluxo](grafo.png)
 
 Nós: 21
 • N1: assinatura da função multiply.
