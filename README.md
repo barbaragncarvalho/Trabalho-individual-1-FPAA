@@ -113,57 +113,103 @@ Mede a quantidade de caminhos independentes em um código-fonte.
 ![Grafo de Fluxo](grafo.png)
 
 Nós: 21
+
 • N1: assinatura da função multiply.
+
 • N2: condição `if len(A) < 4 or len(B) < 4.`
+
 • N3: `return str(int(A) * int(B))`.
-• N4: atribuição de n = max(len(A), len(B))
+
+• N4: atribuição de `n = max(len(A), len(B))`.
+
 • N5: condição `if n % 2 != 0`.
+
 • N6: atribuição de `n += 1`.
+
 • N7: atribuição de A com zeros `A = A.zfill(n)`.
+
 • N8: atribuição de B com zeros `B = B.zfill(n)`.
+
 • N9: atribuição de n2 com metade do tamanho de n.
+
 • N10: divisão de A na metade `Al, Ar = A[:n2], A[n2:]`.
+
 • N11: divisão de B na metade `Bl, Br = B[:n2], B[n2:]`.
+
 • N12: atribuição de p com multiplicação das metades da esquerda `p = multiply(Al, Bl)`.
+
 • N13: atribuição de q com multiplicação das metades da direita `q = multiply(Ar, Br)`.
+
 • N14: soma das metades de A `soma_A = findSum(Al, Ar)`.
+
 • N15: soma das metades de B `soma_B = findSum(Bl, Br)`.
+
 • N16: atribuição de r com multiplicação das somas `r = multiply(soma_A, soma_B)`.
+
 • N17: atribuição do termo do meio como a diferença entre r-p-q `termo_meio = findDiff(r, findSum(p, q))`.
+
 • N18: atribuição do resultado de p ao adicionar zeros à direita `resultado_p = p + '0' * n`.
+
 • N19: atribuição do resultado de r ao adicionar zeros à direita `resultado_r = termo_meio + '0' * n2`.
+
 • N20: atribuição do resultado final como a soma de p, r e q com suas devidas casas decimais completas `resultado_final = findSum(findSum(resultado_p, resultado_r), q)`.
+
 • N21: retorno do resultado final sem zeros à esquerda `return removeLeadingZeros(resultado_final)`.
 
+
 Arestas: 21
+
 • N1 -> N2
+
 • N2 -> N3
+
 • N2 -> N4
+
 • N4 -> N5
+
 • N5 -> N6
+
 • N5 -> N7
+
 • N6 -> N7
+
 • N7 -> N8
+
 • N8 -> N9
+
 • N9 -> N10
+
 • N10 -> N11
+
 • N11 -> N12
+
 • N12 -> N13
+
 • N13 -> N14
+
 • N14 -> N15
+
 • N15 -> N16
+
 • N16 -> N17
+
 • N17 -> N18
+
 • N18 -> N19
+
 • N19 -> N20
+
 • N20 -> N21
+
 
 #### Cálculo da complexidade ciclomática
 𝑀 = 𝐸 − 𝑁 + 2𝑃
+
 M = 21 - 21 + 2.1
+
 M = 2
 
-Portanto, a complexidade ciclomática da função multiply é 2. Isso significa que existem dois caminhos independentes no código, correspondentes ao caso base (quando os números são de tamanhos pequenos) e ao caso recursivo.
+Portanto, a complexidade ciclomática da função `multiply` é 2. Isso significa que existem dois caminhos independentes no código, correspondentes ao caso base (quando os números são de tamanhos pequenos) e ao caso recursivo.
 
 ### Análise da complexidade assintótica
 #### Complexidade Temporal:
@@ -178,7 +224,7 @@ Ela avalia a quantidade de memória adicional necessária para executar o algori
 
 Como em cada chamada da recursão do algoritmo, se armazena variáveis temporárias (Al, Ar, p, q, etc.) e seus tamanhos são proporcionais ao tamanho da entrada naquela chamada (quantidade de dígitos), a complexidade espacial será **O(n)**, onde N é o tamanho da entrada.
 
-#### Casos principais:
+### Casos principais:
 Como a execução do algoritmo de Karatsuba depende apenas do número de dígitos (n) dos operandos e o número de divisões e chamadas recursivas é o mesmo para quaisquer números de mesmo tamanho, então, a complexidade temporal é a mesma para todos os 3 casos. 
 
 Ou seja, o melhor caso, caso médio e pior caso são **Θ(n^1.585)**.
